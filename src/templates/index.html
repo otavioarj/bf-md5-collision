@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Brainfuck</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Envie seu código Brainfuck</h1>
+        <form method="post">
+            <div class="textarea-container">
+                <div class="form-group">
+                    <label for="code1">Código 1:</label>
+                    <textarea name="code1" id="code1" rows="20" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="code2">Código 2:</label>
+                    <textarea name="code2" id="code2" rows="20" required></textarea>
+                </div>
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</body>
+</html>

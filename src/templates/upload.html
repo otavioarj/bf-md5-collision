@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainfuck MD5 Collision Challenge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <span class="bracket">[</span>
+                <span class="plus">+</span>
+                <span class="bracket">]</span>
+            </div>
+            <h1>Brainfuck Challenge</h1>
+            <p class="subtitle">MD5 Collision Quest</p>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="messages">
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    <span class="alert-icon">
+                        {% if category == 'success' %}
+                            ✓
+                        {% else %}
+                            ⚠
+                        {% endif %}
+                    </span>
+                    <span class="alert-message">{{ message }}</span>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <div class="challenge-info">
+            <h2>📋 Challenge Rules</h2>
+            <ul>
+                <li><strong>File 1</strong> must output: <code>Rock N Roll</code></li>
+                <li><strong>File 2</strong> must output: <code>Hack N Roll</code></li>
+                <li>Both files must have the <strong>same MD5 hash</strong></li>
+            </ul>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-container">
+                <div class="form-group">
+                    <label for="file1">
+                        <span class="label-icon">🎸</span>
+                        <span class="label-text">File 1: Rock N Roll</span>
+                    </label>
+                    <div class="file-input-wrapper">
+                        <input type="file" name="file1" id="file1" required accept=".bf,.b,.txt">
+                        <div class="file-input-display">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">Choose a Brainfuck file...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divider">
+                    <span class="vs">VS</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="file2">
+                        <span class="label-icon">💻</span>
+                        <span class="label-text">File 2: Hack N Roll</span>
+                    </label>
+                    <div class="file-input-wrapper">
+                        <input type="file" name="file2" id="file2" required accept=".bf,.b,.txt">
+                        <div class="file-input-display">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">Choose a Brainfuck file...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <span class="btn-text">Submit Files</span>
+                <span class="btn-icon">→</span>
+            </button>
+        </form>
+
+        <div class="footer">
+            <a href="/source" class="source-link">View Source Code</a>
+        </div>
+    </div>
+
+    <script>
+        // Custom file input display
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const display = this.parentElement.querySelector('.file-name');
+                if (this.files.length > 0) {
+                    display.textContent = this.files[0].name;
+                    this.parentElement.classList.add('has-file');
+                } else {
+                    display.textContent = 'Choose a Brainfuck file...';
+                    this.parentElement.classList.remove('has-file');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
